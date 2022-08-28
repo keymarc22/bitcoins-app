@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hash: MyString
+  prev_block: MyString
+  time: 1
+  bits: 1
+  main_chain: false
+  ver: 1
+  mrkl_root: MyString
+  nonce: 1
+  n_tx: 1
+  size: 1
+
+two:
+  hash: MyString
+  prev_block: MyString
+  time: 1
+  bits: 1
+  main_chain: false
+  ver: 1
+  mrkl_root: MyString
+  nonce: 1
+  n_tx: 1
+  size: 1
