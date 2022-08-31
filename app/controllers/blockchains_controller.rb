@@ -3,9 +3,9 @@ class BlockchainsController < ApplicationController
   before_action :find_block, only: :destroy
 
   def index
-    @blockchain = Blockchain.new
-    # @pagy, @blockchains = pagy(Blockchain.all)
-    @blockchains = Blockchain.all
+    @pagy, @blockchains = pagy_countless(Blockchain.all)
+
+    render "scrollable_list" if params[:page]
   end
 
   def create

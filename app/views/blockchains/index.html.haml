@@ -15,4 +15,5 @@
 %section.flex.justify-center
   = turbo_stream_from 'blockchains'
   = turbo_frame_tag "blockchains" do
-    = render @blockchains
+    = render partial: "blockchain", collection: @blockchains
+    = render partial: 'next_page'
