@@ -74,6 +74,12 @@ group :test do
   gem "webdrivers"
 end
 
+group :production do
+
+  gem 'rails_12factor'
+
+end
+
 gem "hotwire-rails", "~> 0.1.3"
 
 gem "haml-rails", "~> 2.0"
