@@ -1,0 +1,28 @@
+.blockchain-container.mt-3{id: "#{dom_id blockchain}", data: { controller: 'actions', 'actions-change-class': 'showDropdown', 'actions-display-class': 'hidden' }, "data-actions-url": blockchain_path(id: blockchain.id) }
+  .blockchain-dropdown.flex.items-center.rounded-lg.border.border-gray-300.py-2.px-4.gap-4
+    .dropdown
+      %p.w-full.text-sm.text-gray-900.bg-gray-50.dark:bg-gray-700.dark:border-gray-600.dark:text-white
+        = blockchain.block_hash
+    %button.text-amber-700.border.border-amber-700.hover:bg-amber-700.hover:text-white.focus:ring-4.focus:outline-none.focus:ring-amber-300.font-medium.rounded-full.text-sm.p-2.5.text-center.inline-flex.items-center.mr-2.dark:border-amber-500.dark:text-amber-500.dark:hover:text-white.dark:focus:ring-amber-800{:class=> "p-2.5", :type => "button", "data-action": "actions#showData"}
+      .down{"data-actions-target": 'down'}
+        %svg.w-3.h-3{:fill => "none", :stroke => "currentColor", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+          %path{:d => "M19 14l-7 7m0 0l-7-7m7 7V3", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
+      .up.hidden{"data-actions-target": 'up'}
+        %svg.w-3.h-3{:fill => "none", :stroke => "currentColor", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+          %path{:d => "M5 10l7-7m0 0l7 7m-7-7v18", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
+    %button.text-red-700.border.border-red-700.hover:bg-red-700.hover:text-white.focus:ring-4.focus:outline-none.focus:ring-red-300.font-medium.rounded-full.text-sm.p-2.5.text-center.inline-flex.items-center.mr-2.dark:border-red-500.dark:text-red-500.dark:hover:text-white.dark:focus:ring-red-800.p-2.5.px-4{data: {action: "click -> actions#delete"}}
+      Delete
+  .dropdown-content.p-4.mt-2{"data-actions-target": 'dropdown'}
+    %ul
+      %li hash: #{blockchain.block_hash}
+      %li prev_block: #{blockchain.prev_block}
+      %li block_index: #{blockchain.block_index}
+      %li time: #{blockchain.time}
+      %li bits: #{blockchain.bits}
+      %li ver: #{blockchain.ver}
+      %li mrkl_root: #{blockchain.mrkl_root}
+      %li nonce: #{blockchain.nonce}
+      %li n_tx: #{blockchain.n_tx}
+      %li size: #{blockchain.size}
+      %li main_chain: #{blockchain.main_chain}
+      %li height: #{blockchain.height}

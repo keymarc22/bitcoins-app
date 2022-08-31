@@ -14,6 +14,53 @@
  *= require_self
  */
 
- #add-blockchain {
+ :root {
+  --red-50: #fef2f2;
+  --red-500: #ef4444;
+  --red-700: #b91c1c;
+  --red-900: #7f1d1d;
+  --green-900: #14532d;
+ }
+
+ #blockchain_hash {
   width: 40rem;
  }
+
+ .is-invalid {
+  background-color: var(--red-50);
+  border-color: 5px solid var(--red-500);
+  color: var(--red-900);
+ }
+
+ .is-invalid::placeholder {
+  color: var(--red-700);
+ }
+
+ .is-invalid:focus {
+  border: 1px solid var(--red-500);
+  outline-style: var(--red-500);
+ }
+
+ .dropdown-content {
+  display: none;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  animation: growDown 400ms ease-in-out forwards;
+  transform-origin: top center;
+}
+
+.showDropdown {
+  display: block;
+}
+
+@keyframes growDown {
+  0% {
+      transform: scaleY(0)
+  }
+  80% {
+      transform: scaleY(1.1)
+  }
+  100% {
+      transform: scaleY(1)
+  }
+}
