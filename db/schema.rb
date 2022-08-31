@@ -10,8 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_28_233046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blockchains", force: :cascade do |t|
+    t.string "block_hash"
+    t.string "ver"
+    t.string "prev_block"
+    t.string "mrkl_root"
+    t.string "time"
+    t.string "bits"
+    t.string "nonce"
+    t.string "n_tx"
+    t.string "size"
+    t.string "block_index"
+    t.boolean "main_chain"
+    t.string "height"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["block_hash"], name: "index_blockchains_on_block_hash"
+  end
 
 end

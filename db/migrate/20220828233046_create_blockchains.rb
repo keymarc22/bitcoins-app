@@ -1,16 +1,18 @@
 class CreateBlockchains < ActiveRecord::Migration[7.0]
   def change
     create_table :blockchains do |t|
-      t.string :hash
+      t.string :block_hash, index: true, unique: true
+      t.string :ver
       t.string :prev_block
-      t.integer :time
-      t.integer :bits
-      t.boolean :main_chain
-      t.integer :ver
       t.string :mrkl_root
-      t.integer :nonce
-      t.integer :n_tx
-      t.integer :size
+      t.string :time
+      t.string :bits
+      t.string :nonce
+      t.string :n_tx
+      t.string :size
+      t.string :block_index
+      t.boolean :main_chain
+      t.string :height
 
       t.timestamps
     end
