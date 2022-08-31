@@ -1,7 +1,7 @@
 # bitcoins-app
 Save and consult blockchain.
 
-App made it with RoR, hotwire and tailwind
+App made with RoR, hotwire and tailwind
 
 ## API
 https://www.blockchain.com/api/blockchain_api
