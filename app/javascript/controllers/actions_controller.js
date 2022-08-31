@@ -7,9 +7,9 @@ export default class extends Controller {
 
   showData() {
     if (this.dropdownTarget.classList.contains(this.changeClass)) {
-      this.toggleUp();
-    } else {
       this.toggleDown();
+    } else {
+      this.toggleUp();
     }
   }
 

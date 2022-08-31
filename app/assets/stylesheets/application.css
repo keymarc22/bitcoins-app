@@ -23,7 +23,7 @@
  }
 
  #blockchain_hash {
-  width: 70vw;
+  width: 90vw;
  }
 
  .is-invalid {
@@ -42,18 +42,30 @@
  }
 
  .dropdown .container {
-   overflow-x: scroll;
-   width: 40vw;
-   text-overflow: ellipsis;
+   overflow: hidden;
+   width: 60vw;
  }
 
  .dropdown-content {
   display: none;
-  width: 75vw;
   background-color: #f9f9f9;
+  width: 90vw;
   animation: growDown 400ms ease-in-out forwards;
   transform-origin: top center;
-  overflow-x: scroll;
+}
+
+@media (min-width: 900px) {
+  #blockchain_hash {
+    width: calc(50vw - 10rem);
+   }
+
+   .dropdown .container {
+    width: calc(42vw - 10rem);
+   }
+
+   .dropdown-content {
+    width: calc(53vw - 10rem);
+   }
 }
 
 .dropdown-content li p {
