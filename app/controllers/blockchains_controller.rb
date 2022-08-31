@@ -9,19 +9,26 @@ class BlockchainsController < ApplicationController
   end
 
   def create
-    @blockchain = Blockchain.create(blockchain_params)
+    @blockchain = Blockchain.new(blockchain_params)
 
     respond_to do |format|
-      format.turbo_stream
+      if @blockchain.save
+        format.json { render status: :ok, json: { message: "Blockchain was successfully created." } }
+        format.turbo_stream
+      else
+        format.json { render status: :unprocessable_entity, json: { message: @blockchain.errors.full_messages.join(',') } }
+      end
     end
   end
 
   def destroy
-    @blockchain.destroy
-
     respond_to do |format|
-      # format.html { redirect_to blockchains_url, notice: "Blockchain was successfully destroyed." }
-      format.turbo_stream
+      if @blockchain.destroy
+        format.json { render status: :ok, json: { message: "Blockchain was successfully destroyed." } }
+        format.turbo_stream
+      else
+        format.json { render status: :unprocessable_entity, json: { message: @blockchain.errors.full_messages.join(',') } }
+      end
     end
   end
 
@@ -40,7 +47,7 @@ class BlockchainsController < ApplicationController
         :block_index,
         :main_chain,
         :height,
-      ).merge(block_hash: params[:blockchain][:hash])
+      )
     end
 
     def find_block

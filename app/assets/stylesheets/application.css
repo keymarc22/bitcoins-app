@@ -23,7 +23,7 @@
  }
 
  #blockchain_hash {
-  width: 40rem;
+  width: 70vw;
  }
 
  .is-invalid {
@@ -41,12 +41,23 @@
   outline-style: var(--red-500);
  }
 
+ .dropdown .container {
+   overflow-x: scroll;
+   width: 40vw;
+   text-overflow: ellipsis;
+ }
+
  .dropdown-content {
   display: none;
+  width: 75vw;
   background-color: #f9f9f9;
-  min-width: 160px;
   animation: growDown 400ms ease-in-out forwards;
   transform-origin: top center;
+  overflow-x: scroll;
+}
+
+.dropdown-content li p {
+  word-break: break-all;
 }
 
 .showDropdown {
@@ -63,4 +74,8 @@
   100% {
       transform: scaleY(1)
   }
+}
+
+.font-bold {
+  font-weight: 700;
 }

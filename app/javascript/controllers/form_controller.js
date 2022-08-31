@@ -10,13 +10,13 @@ export default class extends Controller {
 
     if (this.inputTarget.checkValidity()) {
       this.toggle(false);
-      this.actionFailedMessage('');
+      this.success('');
 
       // get blockchain data
       this.getHashData(this.inputTarget.value);
     } else {
       this.toggle(true);
-      this.actionFailedMessage('Please, verify your entry. Only permitted letters and numbers');
+      this.error('Please, verify your entry. Only permitted letters and numbers');
     }
   }
 
@@ -26,12 +26,14 @@ export default class extends Controller {
       : this.inputTarget.classList.remove(this.changeClass)
   }
 
-  actionSuccessfulMessage(msg) {
-    this.successMessageTarget.textContent = msg;
+  error(msg) {
+    this.errorMessageTarget.textContent = msg;
+    this.successMessageTarget.textContent = "";
   }
 
-  actionFailedMessage(msg) {
-    this.errorMessageTarget.textContent = msg
+  success(msg) {
+    this.successMessageTarget.textContent = msg;
+    this.errorMessageTarget.textContent = "";
   }
 
   getHashData(block_hash) {
@@ -45,35 +47,58 @@ export default class extends Controller {
       if (data.error) {
         throw new Error(data.message)
       } else {
-        this.actionFailedMessage('');
+        this.success('');
         this.postData(data);
       }
     })
     .catch(err => {
-      this.actionSuccessfulMessage('');
-      this.actionFailedMessage(err.message)
+      this.error(err.message);
     });
   }
 
-  postData(data) {
-    var blockchain = {
-      blockchain: data
-    }
+  postData({
+    hash,
+    ver,
+    prev_block,
+    mrkl_root,
+    time,
+    bits,
+    nonce,
+    n_tx,
+    size,
+    block_index,
+    main_chain,
+    height
+  }) {
 
     Rails.ajax({
       type: 'POST',
-      dataType: 'json',
       url: this.data.get('url'),
-      data: blockchain,
-      beforeSend(xhr, options) {
+      beforeSend: (xhr, options) => {
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-        // Workaround: add options.data late to avoid Content-Type header to already being set in stone
-        // https://github.com/rails/rails/blob/master/actionview/app/assets/javascripts/rails-ujs/utils/ajax.coffee#L53
-        options.data = JSON.stringify(blockchain)
+        options.data = JSON.stringify({
+          block_hash: hash,
+          ver: ver,
+          prev_block: prev_block,
+          mrkl_root: mrkl_root,
+          time: time,
+          bits: bits,
+          nonce: nonce,
+          n_tx: n_tx,
+          size: size,
+          block_index: block_index,
+          main_chain: main_chain,
+          height: height,
+        })
+
         return true
       },
-      success: () => {
+      success: ({message}) => {
         this.inputTarget.value = ''
+        this.success(message)
+      },
+      error: ({message}) => {
+        this.error(message)
       }
     })
   }
