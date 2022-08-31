@@ -2,11 +2,11 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: <%= Rails.application.credentials[Rails.env.to_sym].dig(:db, :username) %>
-  password: <%= Rails.application.credentials[Rails.env.to_sym].dig(:db, :password) %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
+  username: <%= Rails.application.credentials[Rails.env.to_sym].dig(:db, :username) %>
+  password: <%= Rails.application.credentials[Rails.env.to_sym].dig(:db, :password) %>
   <<: *default
   database: bitcoins_app_development
 
@@ -16,6 +16,7 @@ test:
 
 production:
   <<: *default
-  database: bitcoins_app_production
-  username: bitcoins_app
+  database: <%= ENV["DB_NAME"] %>
+  username: <%= ENV["BITCOINS_APP_DATABASE_USERNAME"] %>
   password: <%= ENV["BITCOINS_APP_DATABASE_PASSWORD"] %>
+  port: <%= ENV["BITCOINS_APP_PORT"] %>
